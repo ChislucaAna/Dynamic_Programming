@@ -1,0 +1,21 @@
+problema : (subsir maximal sau minimal)
+
+1. dandu se un sir de numere intregi sa se determine subsirul crescator de lungime maxim.
+
+subsirul nu e format neaparat de elemente consecutive
+
+Se da sirul 1 -2 3 2 4 4
+Subsirul maxim: 1 3 4 4
+
+L(i)=1, daca i =n;
+sau L(i)=1+L(j), daca ai<aj si i!=n; i<i<j
+
+Solutia problemei daca o rezolvam in maniera clasica, de a genera fiecare subsir al multimii A apoi de a verifica daca e crescator, este una foarte ineficienta. 
+
+Problema poate fi rezolvata cu programare dinamica deoarece ea poate fi descompusa in subprobleme: subproblema i este de a gasi subsirul crescator de lungime maxima, care incepe cu a[i], respectand restrictia ca elementul a[i] cuc are incepe subsirul sa aiba valoarea mai mica sau egala cu cea a succesorului sau din subsir, a[j] si bineinteles i<j,limitand astfel multimea elementelor din care se alege succesorul;
+
+Metoda cea mai simpla de a gasi subsirul de lungime maxima care incepe cu a[i] este de a cauta printre subsirurile de lungime maxima, descoperite in subproblemele anterioare, cel mai lung subsir care incepe cu a[j], si poate fi succesor a lui a[i], obtinand astfel un nou subsir de lungime mai mare car eincepe cu a[i]. Pentru a respecta principiul optimalitii, lungimea subsirurilor descoperite anterior trebuie sa fie maxima. Deci subproblemele nu sunt independente deoarece in subproblema i alegerea subsirului care incepe cu a[i] se bazeaza pe alegerile facute in subproblemele anterioare.
+
+Pentru a calcula valoare solutiei optime in maniera bottom up, se va forma un veector al lungimilor maxime pornind de la ultimul element catre primul. In acest vector vom memora in pozitia i, lungimea maxima a unui subsir crescator care se poate forma incepand cu a[i].
+
+Cum lungimea maxima care se paote forma cu un singur element este 1, lungimea amxima corespunzatoare ultimului element o vom initializa cu 1 (a[n]). Pentru a reconstitui urma elementelor solutiei vom folosi vecotrul p ( vecotr de pozitii) in care pe pozitia i se memopreaza indicele elementului urmator, din subsirul de lungime maxima care incepe cu a[i]; 
